@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dependencies" Version="0.96.1" />
+    <PackageReference Include="Community.PowerToys.Run.Plugin.Dependencies" Version="0.96.1" />
   </ItemGroup>
 
   <ItemGroup>
