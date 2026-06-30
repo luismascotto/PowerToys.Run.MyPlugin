@@ -1,0 +1,14 @@
+{
+  "ID": "3C3FE0EB11124503A176341C2360F14A",
+  "ActionKeyword": "myplugin",
+  "IsGlobal": false,
+  "Name": "MyPlugin",
+  "Author": "luismascotto",
+  "Version": "0.96.1",
+  "Language": "csharp",
+  "Website": "https://github.com/luismascotto/MyPlugin",
+  "ExecuteFileName": "MyPlugin.dll",
+  "IcoPathDark": "Images\\myplugin.dark.png",
+  "IcoPathLight": "Images\\myplugin.light.png",
+  "DynamicLoading": false
+}
