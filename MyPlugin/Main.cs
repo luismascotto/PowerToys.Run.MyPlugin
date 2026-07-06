@@ -1,8 +1,9 @@
-using ManagedCommon;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
+using ManagedCommon;
 using Wox.Plugin;
 
 namespace MyPlugin;
@@ -25,7 +26,7 @@ public class Main : IPlugin, IContextMenu, IDisposable
     /// <summary>
     /// Description of the plugin.
     /// </summary>
-    public string Description => "MyPlugin Description";
+    public string Description => "First Plugin tryout.";
 
     private PluginInitContext Context { get; set; }
 
@@ -49,16 +50,26 @@ public class Main : IPlugin, IContextMenu, IDisposable
                 QueryTextDisplay = search,
                 IcoPath = IconPath,
                 Title = "Title: " + search,
-                SubTitle = "SubTitle",
+                SubTitle = "WingetUpdater",
                 ToolTipData = new ToolTipData("Title", "Text"),
                 Action = _ =>
                 {
-                    Clipboard.SetDataObject(search);
+                    ExecuteCmd("Consoler");
                     return true;
                 },
                 ContextData = search,
             }
         ];
+    }
+
+    private void ExecuteCmd(string command)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "cmd.exe",
+            Arguments = $"/c {command}", // Use "/c" to close window automatically after execution
+            UseShellExecute = false
+        });
     }
 
     /// <summary>
@@ -86,7 +97,7 @@ public class Main : IPlugin, IContextMenu, IDisposable
                 new ContextMenuResult
                 {
                     PluginName = Name,
-                    Title = "Copy to clipboard (Ctrl+C)",
+                    Title = "Copy to Clipboard",
                     Glyph = "\xE8C8", // Copy
                     FontFamily = "Segoe Fluent Icons,Segoe MDL2 Assets",
                     AcceleratorKey = Key.C,
@@ -129,7 +140,7 @@ public class Main : IPlugin, IContextMenu, IDisposable
         Disposed = true;
     }
 
-    private void UpdateIconPath(Theme theme) => IconPath = theme == Theme.Light || theme == Theme.HighContrastWhite ? "Images/myplugin.light.png" : "Images/myplugin.dark.png";
+    private void UpdateIconPath(Theme theme) => IconPath = theme is Theme.Light or Theme.HighContrastWhite ? "Images/myplugin.light.png" : "Images/myplugin.dark.png";
 
     private void OnThemeChanged(Theme currentTheme, Theme newTheme) => UpdateIconPath(newTheme);
 }
